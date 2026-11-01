@@ -1,4 +1,4 @@
-export interface Note {
+export interface Habit {
     id: number;
     title: string;
     content: string;

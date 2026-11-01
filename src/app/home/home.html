@@ -1,1 +1,10 @@
-<p>home works!</p>
+<h1 class="home">My habits</h1>
+
+<ul class="home_ul">
+  @for (habit of habits(); track habit.id; let i = $index) {
+    <p class="home_p"> {{ i + 1 + '.'}}
+      <strong>{{ habit.title }}</strong>:
+      {{ habit.content }}
+    </p>
+  }
+</ul>

@@ -1,14 +1,5 @@
 <app-header></app-header>
 
-<h1 class="main">My habits</h1>
-
-<ul class="main">
-  @for (note of notes(); track note.id; let i = $index) {
-    <p class="main"> {{ i + 1 + '.'}}
-      <strong>{{ note.title }}</strong>:
-      {{ note.content }}
-    </p>
-  }
-</ul>
+<app-home></app-home>
 
 <app-footer></app-footer>
