@@ -1,1 +1,15 @@
-<p>habit-card works!</p>
+<div class="habit-card">
+  <div class="habit-card__content">
+    <h3 class="habit-card__title">
+      {{ habit().title }}
+    </h3>
+
+    <p class="habit-card__description">
+      {{ habit().content }}
+    </p>
+  </div>
+
+  <button class="habit-card__button">
+    ✓
+  </button>
+</div>

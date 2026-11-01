@@ -1,10 +1,9 @@
-<h1 class="home">My habits</h1>
+<div class="home">
+  <h1 class="home_title">My habits</h1>
 
-<ul class="home_ul">
-  @for (habit of habits(); track habit.id; let i = $index) {
-    <p class="home_p"> {{ i + 1 + '.'}}
-      <strong>{{ habit.title }}</strong>:
-      {{ habit.content }}
-    </p>
-  }
-</ul>
+  <div class="home_list">
+    @for (habit of habits(); track habit.id) {
+      <app-habit-card [habit]="habit"></app-habit-card>
+    }
+  </div>
+</div>
