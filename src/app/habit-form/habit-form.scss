@@ -6,11 +6,11 @@
     align-items: flex-start;
     gap: 3px;
 
-     background-color: v.$primary-color;
+     background-color: v.$background-color;
         width: max-content;
         height: fit-content;
         padding: 15px;
-        border-radius: 15%;
+        border-radius: 33px;
         box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
         margin-block: 5px;
 
@@ -20,6 +20,102 @@
     }
 
     &_input{
-        color: v.$primary-color;
+        width: max-content;
+        padding: 10px 12px;
+
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+
+        font-size: 15px;
+        outline: none;
+
+        &:focus {
+            border-color: #4f6fdc;
+        }
+    }
+
+    &_button{
+        padding: 5px 10px;
+        display: inline-block;
+        border-radius: 100px;
+
+        width: 100%;
+        margin-top: 12px;
+        padding: 10px 14px;
+
+        border: none;
+        border-radius: 10px;
+
+        background: #4f6fdc;
+        color: white;
+
+        font-weight: 600;
+        cursor: pointer;
+
+        &:link,
+        &:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 15px 40px;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            position: absolute;
+        }
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        &:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        &-white {
+            background-color: v.$primary-color;
+            color: v.$text-color;
+            
+            &::after {
+                background-color: v.$background-color;
+            }
+        }
+
+        &::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all .4s;
+        }
+
+        &:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+
+        &-animated {
+            animation: moveInBottom 5s ease-out;
+            animation-fill-mode: backwards;
+        }
+    }
+}
+
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }

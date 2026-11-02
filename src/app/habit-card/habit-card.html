@@ -1,18 +1,20 @@
 <div class="habit-card">
-  <button 
-    class="habit-card__check"
-    [class.habit-card__check--active]="habit().completedToday"
-    (click)="toggleCompleted.emit(habit().id)"
-  >✓</button>
-  
-  <div class="habit-card__content">
-    <h3 class="habit-card__title">
-      {{ habit().title }}
-    </h3>
+  <div class="habit-card__section">
+    <button 
+        class="habit-card__check"
+        [class.habit-card__check--active]="habit().completedToday"
+        (click)="toggleCompleted.emit(habit().id)"
+      >✓</button>
+      
+      <div class="habit-card__content">
+        <h3 class="habit-card__title">
+          {{ habit().title }}
+        </h3>
 
-    <p class="habit-card__description">
-      {{ habit().content }}
-    </p>
+        <p class="habit-card__description">
+          {{ habit().content }}
+        </p>
+      </div>
   </div>
 
   <button class="habit-card__button"
