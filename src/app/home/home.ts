@@ -73,6 +73,12 @@ export class Home {
   }
 
   deleteHabit(id: number) {
+    const confirmed = confirm(  'Are you sure you want to delete this habit? This action cannot be undone.');
+
+    if (!confirmed) {
+      return;
+    }
+
     this.habits.update(habits =>
       habits.filter(habit => habit.id !== id)
     );

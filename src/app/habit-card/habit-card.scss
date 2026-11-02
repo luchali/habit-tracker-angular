@@ -20,7 +20,7 @@
         height: 25px;
         width: 25px;
         color: v.$background-color;
-        background-color: v.$secondary-color;
+        background-color: v.$primary-color;
         border: 1px solid v.$background-color;
         border-radius: 50%;
 
@@ -30,19 +30,23 @@
     }
 
     &__check {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 2px solid v.$background-color;
 
         background: transparent;
-        color: white;
+        color: v.$background-color;
 
         cursor: pointer;
 
         &--active {
-        background-color: white;
-        color: #2861c4;
+        background-color: v.$background-color;
+        color: v.$secondary-color;
+        }
+
+        &:hover{
+            background-color: v.$success-color;
         }
     }
 
