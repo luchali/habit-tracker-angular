@@ -1,0 +1,25 @@
+<form
+  class="habit-form"
+  (submit)="createHabit(title, content); $event.preventDefault()"
+>
+  <p class="habit-form_p">Habit title</p>
+  <input
+    #title
+    type="text"
+    placeholder="Habit title"
+    class="habit-form_input"
+    required
+  />
+
+  <p class="habit-form_p">Habit description</p>
+  <input
+    #content
+    type="text"
+    placeholder="Description"
+    class="habit-form_input"
+  />
+
+  <button type="submit" class="habit-form_button">
+    Add habit
+  </button>
+</form>

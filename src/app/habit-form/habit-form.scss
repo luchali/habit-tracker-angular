@@ -1,0 +1,17 @@
+@use '../../utils/variables' as v;
+
+.habit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+
+    &_p{
+        margin: 0;
+        margin-top: 4px;
+    }
+
+    &_input{
+        color: v.$primary-color;
+    }
+}

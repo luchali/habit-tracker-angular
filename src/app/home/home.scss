@@ -5,20 +5,22 @@
     margin: 0;
     display: grid;
     grid-template-columns: auto auto;
-     justify-items: center;
-    background-color: aquamarine;
+    justify-items: center;
 
-
+    &_habitssection{
+        margin: 0;
+    }
     &_title {
         grid-column: 1/-1;
-
+        text-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
     }
 
     &_list{
         background-color: v.$primary-color;
         width: max-content;
+        height: fit-content;
         padding: 5px;
         border-radius: 15%;
-        
+        box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
     }
 }

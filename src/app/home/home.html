@@ -1,9 +1,20 @@
 <div class="home">
   <h1 class="home_title">My habits</h1>
+  <div class="home_habitssection">
+    <app-habit-form
+    (habitCreated)="addHabit($event)"
+    ></app-habit-form>
+    
+    <div class="home_list">
+      @for (habit of habits(); track habit.id) {
+        <app-habit-card [habit]="habit" (toggleCompleted)="toggleHabit($event)"></app-habit-card>
+      } @empty {
+        <p>No habits yet</p>
+      }
+    </div>
+  </div>
 
-  <div class="home_list">
-    @for (habit of habits(); track habit.id) {
-      <app-habit-card [habit]="habit"></app-habit-card>
-    }
+  <div>
+    Statistic
   </div>
 </div>

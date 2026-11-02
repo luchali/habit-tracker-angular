@@ -1,4 +1,10 @@
 <div class="habit-card">
+  <button 
+    class="habit-card__check"
+    [class.habit-card__check--active]="habit().completedToday"
+    (click)="toggleCompleted.emit(habit().id)"
+  >✓</button>
+  
   <div class="habit-card__content">
     <h3 class="habit-card__title">
       {{ habit().title }}
@@ -9,7 +15,9 @@
     </p>
   </div>
 
-  <button class="habit-card__button">
-    ✓
-  </button>
+  <button class="habit-card__button">✕</button>
+
+  <!-- <label>
+    <input class="habit-card__checkbox" type="checkbox" />
+  </label> -->
 </div>

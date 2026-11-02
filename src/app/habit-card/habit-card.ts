@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Habit } from '../models/habit.model';
 
 @Component({
@@ -9,4 +9,5 @@ import { Habit } from '../models/habit.model';
 })
 export class HabitCard {
   habit = input.required<Habit>();
+  toggleCompleted = output<number>();
 }
