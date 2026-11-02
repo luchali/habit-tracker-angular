@@ -10,4 +10,6 @@ import { Habit } from '../models/habit.model';
 export class HabitCard {
   habit = input.required<Habit>();
   toggleCompleted = output<number>();
+  deleteHabit = output<number>();
+  
 }

@@ -15,7 +15,9 @@
     </p>
   </div>
 
-  <button class="habit-card__button">✕</button>
+  <button class="habit-card__button"
+  (click)="deleteHabit.emit(habit().id)"
+  >✕</button>
 
   <!-- <label>
     <input class="habit-card__checkbox" type="checkbox" />

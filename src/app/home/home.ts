@@ -58,17 +58,25 @@ export class Home {
   }
 
   toggleHabit(id: number) {
-  this.habits.update(habits =>
-    habits.map(habit =>
-      habit.id === id
-        ? {
-            ...habit,
-            completedToday: !habit.completedToday,
-          }
-        : habit
-    )
-  );
+    this.habits.update(habits =>
+      habits.map(habit =>
+        habit.id === id
+          ? {
+              ...habit,
+              completedToday: !habit.completedToday,
+            }
+          : habit
+      )
+    );
 
-  this.saveHabits(this.habits());
-}
+    this.saveHabits(this.habits());
+  }
+
+  deleteHabit(id: number) {
+    this.habits.update(habits =>
+      habits.filter(habit => habit.id !== id)
+    );
+
+    this.saveHabits(this.habits());
+  }
 }

@@ -7,7 +7,11 @@
     
     <div class="home_list">
       @for (habit of habits(); track habit.id) {
-        <app-habit-card [habit]="habit" (toggleCompleted)="toggleHabit($event)"></app-habit-card>
+        <app-habit-card 
+          [habit]="habit" 
+          (toggleCompleted)="toggleHabit($event)" 
+          (deleteHabit)="deleteHabit($event)"
+        ></app-habit-card>
       } @empty {
         <p>No habits yet</p>
       }
