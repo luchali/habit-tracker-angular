@@ -37,6 +37,9 @@
   </div>
 
   <div class="home_statisticsection">
-    Statistic
+    <app-habit-statistics
+      [habits]="habits()"
+      [maxStreak]="maxStreak()"
+    ></app-habit-statistics>
   </div>
 </div>

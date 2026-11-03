@@ -1,0 +1,44 @@
+<section class="statistics">
+  <div class="statistics__header">
+    <h2>Statistics</h2>
+    <p>Your daily progress</p>
+  </div>
+
+  <div class="statistics__grid">
+    <div class="statistics__card">
+      <span>Total habits</span>
+      <strong>{{ totalHabits() }}</strong>
+    </div>
+
+    <div class="statistics__card">
+      <span>Completed today</span>
+      <strong>
+        {{ completedToday() }} / {{ totalHabits() }}
+      </strong>
+    </div>
+
+    <div class="statistics__card">
+      <span>Daily progress</span>
+      <strong>{{ dailyProgress() }}%</strong>
+    </div>
+
+    <div class="statistics__card">
+      <span>Best current streak</span>
+      <strong>🔥 {{ maxStreak() }} days</strong>
+    </div>
+  </div>
+
+  <div class="statistics__progress">
+    <div class="statistics__progress-info">
+      <span>Today's goal</span>
+      <span>{{ dailyProgress() }}%</span>
+    </div>
+
+    <div class="statistics__progress-track">
+      <div
+        class="statistics__progress-fill"
+        [style.width.%]="dailyProgress()"
+      ></div>
+    </div>
+  </div>
+</section>

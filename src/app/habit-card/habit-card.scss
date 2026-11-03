@@ -30,8 +30,12 @@
         border: 1px solid v.$background-color;
         border-radius: 50%;
 
+        &:hover{
+            background-color: v.$danger-color;
+        }
+
         &:active{
-            background-color: red;
+            background-color: v.$danger-color;
         }
     }
 

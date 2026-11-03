@@ -3,9 +3,10 @@ import { HabitCard } from '../habit-card/habit-card';
 import { Habit } from '../models/habit.model';
 import { HabitForm } from '../habit-form/habit-form';
 import { calculateStreak } from '../../utils/calculate-streak';
+import { HabitStatistics } from '../habit-statistics/habit-statistics';
 
 @Component({
-  imports: [HabitCard, HabitForm],
+  imports: [HabitCard, HabitForm, HabitStatistics],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
