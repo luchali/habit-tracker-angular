@@ -4,4 +4,5 @@ export interface Habit {
     content: string;
     createdAt: Date;
     completedToday: boolean;
+    completedDates: string[];
 }

@@ -4,6 +4,24 @@
     <app-habit-form
     (habitCreated)="addHabit($event)"
     ></app-habit-form>
+
+    <div class="streak">
+      <img
+        class="streak__fire"
+        src="fire-streak.gif"
+        alt="Fire streak"
+      />
+
+      <div class="streak__info">
+        <span class="streak__count">
+          {{ maxStreak() }}
+        </span>
+
+        <span class="streak__text">
+          max day streak
+        </span>
+      </div>
+    </div>
     
     <div class="home_list">
       @for (habit of habits(); track habit.id) {
@@ -18,7 +36,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="home_statisticsection">
     Statistic
   </div>
 </div>

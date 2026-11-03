@@ -102,7 +102,7 @@
         &:hover::after {
             transform: scaleX(1.4) scaleY(1.6);
             opacity: 0;
-            color: v.$background-color;
+            color: v.$text-color;
         }
 
         &-animated {

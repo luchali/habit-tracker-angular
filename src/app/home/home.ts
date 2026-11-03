@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { HabitCard } from '../habit-card/habit-card';
 import { Habit } from '../models/habit.model';
 import { HabitForm } from '../habit-form/habit-form';
+import { calculateStreak } from '../../utils/calculate-streak';
 
 @Component({
   imports: [HabitCard, HabitForm],
@@ -19,6 +20,7 @@ export class Home {
       content: data.content,
       createdAt: new Date(),
       completedToday: false,
+      completedDates: [],
     };
 
    this.habits.update(habits => {
@@ -54,23 +56,58 @@ export class Home {
     return parsedHabits.map((habit: Habit) => ({
       ...habit,
       createdAt: new Date(habit.createdAt),
+      completedDates: habit.completedDates ?? [],
     }));
   }
 
+  private getToday(): string {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
   toggleHabit(id: number) {
+    const today = this.getToday();
+    
     this.habits.update(habits =>
-      habits.map(habit =>
-        habit.id === id
-          ? {
-              ...habit,
-              completedToday: !habit.completedToday,
-            }
-          : habit
-      )
+      habits.map(habit => {
+        if (habit.id !== id) {
+          return habit;
+        }
+
+        const isCompletedToday =
+          habit.completedDates.includes(today);
+
+        return {
+          ...habit,
+
+          completedDates: isCompletedToday
+            ? habit.completedDates.filter(date => date !== today)
+            : [...habit.completedDates, today],
+        };
+      })
     );
 
     this.saveHabits(this.habits());
   }
+
+  maxStreak = computed(() => {
+  const habits = this.habits();
+
+  if (!habits.length) {
+    return 0;
+  }
+
+  const streaks = habits.map(habit =>
+    calculateStreak(habit.completedDates)
+  );
+
+  return Math.max(...streaks);
+});
 
   deleteHabit(id: number) {
     const confirmed = confirm(  'Are you sure you want to delete this habit? This action cannot be undone.');

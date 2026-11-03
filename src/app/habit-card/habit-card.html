@@ -2,7 +2,7 @@
   <div class="habit-card__section">
     <button 
         class="habit-card__check"
-        [class.habit-card__check--active]="habit().completedToday"
+        [class.habit-card__check--active]="isCompletedToday()"
         (click)="toggleCompleted.emit(habit().id)"
       >✓</button>
       
@@ -14,6 +14,7 @@
         <p class="habit-card__description">
           {{ habit().content }}
         </p>
+        <app-fire-streak [habit]="habit()"></app-fire-streak>
       </div>
   </div>
 
