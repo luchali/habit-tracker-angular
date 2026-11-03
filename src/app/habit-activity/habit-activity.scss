@@ -1,0 +1,163 @@
+@use '../../utils/variables' as v;
+
+.activity {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+  box-sizing: border-box;
+
+  &__header {
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      color: v.$text-color;
+    }
+
+    p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__table {
+    min-width: 400px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 100px repeat(7, minmax(42px, 1fr));
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 8px;
+  }
+
+  &__row--header {
+    margin-bottom: 12px;
+    color: #6b7280;
+    font-size: 12px;
+  }
+
+  &__day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+
+    small {
+      font-size: 11px;
+    }
+  }
+
+  &__habit {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 34px;
+
+    background: #edf0f5;
+    border-radius: 8px;
+
+    color: white;
+    font-size: 17px;
+
+    transition: background-color 0.2s;
+
+    &--completed {
+      background: v.$primary-color;
+    }
+
+    &--unavailable {
+      background: #f8f9fb;
+      border: 1px dashed #e5e7eb;
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 16px;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    i {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+  }
+
+  &__legend-done {
+    background: v.$primary-color;
+  }
+
+  &__legend-missed {
+    background: #edf0f5;
+  }
+
+  &__legend-unavailable {
+    background: #f8f9fb;
+    border: 1px dashed #d1d5db;
+  }
+
+  &__summary {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  &__summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  &__progress {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: v.$primary-color;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+  }
+}

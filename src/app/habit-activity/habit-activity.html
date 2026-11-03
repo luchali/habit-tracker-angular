@@ -1,0 +1,73 @@
+<section class="activity">
+  <div class="activity__header">
+    <div>
+      <h2>Habit activity</h2>
+      <p>Last 7 days</p>
+    </div>
+  </div>
+
+  <div class="activity__scroll">
+    <div class="activity__table">
+
+      <div class="activity__row activity__row--header">
+        <span>Habits</span>
+
+        @for (day of days; track day.date) {
+          <div class="activity__day">
+            <span>{{ day.label }}</span>
+            <small>{{ day.dayNumber }}</small>
+          </div>
+        }
+      </div>
+
+      @for (habit of habits(); track habit.id) {
+        <div class="activity__row">
+
+          <span class="activity__habit" [title]="habit.title">
+            {{ habit.title }}
+          </span>
+
+          @for (day of days; track day.date) {
+            <div
+              class="activity__cell"
+              [class.activity__cell--completed]="
+                isCompleted(habit, day.date)
+              "
+              [class.activity__cell--unavailable]="
+                !isAvailable(habit, day.date)
+              "
+              [title]="habit.title + ' — ' + day.date"
+            >
+              @if (isCompleted(habit, day.date)) {
+                <span>✓</span>
+              }
+            </div>
+          }
+        </div>
+      } @empty {
+        <p class="activity__empty">No habits yet</p>
+      }
+
+    </div>
+  </div>
+
+  <div class="activity__legend">
+    <span><i class="activity__legend-done"></i> Completed</span>
+    <span><i class="activity__legend-missed"></i> Missed</span>
+    <span><i class="activity__legend-unavailable"></i> Not created yet</span>
+  </div>
+
+  <div class="activity__summary">
+    <div class="activity__summary-header">
+      <span>Weekly completion</span>
+      <strong>{{ weeklyEfficiency() }}%</strong>
+    </div>
+
+    <div class="activity__progress">
+      <div
+        class="activity__progress-fill"
+        [style.width.%]="weeklyEfficiency()"
+      ></div>
+    </div>
+  </div>
+</section>
