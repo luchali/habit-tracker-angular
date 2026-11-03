@@ -23,7 +23,7 @@
         width: max-content;
         padding: 10px 12px;
 
-        border: 1px solid #d1d5db;
+        border: 1px solid v.$border-color;
         border-radius: 10px;
 
         font-size: 15px;
@@ -35,6 +35,8 @@
     }
 
     &_button{
+        position: relative;
+        z-index: 1;
         padding: 5px 10px;
         display: inline-block;
         border-radius: 100px;
@@ -46,26 +48,26 @@
         border: none;
         border-radius: 10px;
 
-        background: #4f6fdc;
-        color: white;
+        background: v.$primary-color;
 
         font-weight: 600;
         cursor: pointer;
 
-        &:link,
-        &:visited {
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 15px 40px;
-            display: inline-block;
-            border-radius: 100px;
-            transition: all .2s;
-            position: absolute;
-        }
+        // &:link,
+        // &:visited {
+        //     text-transform: uppercase;
+        //     text-decoration: none;
+        //     padding: 15px 40px;
+        //     display: inline-block;
+        //     border-radius: 100px;
+        //     transition: all .2s;
+        //     position: absolute;
+        // }
 
         &:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: v.$background-color;
         }
 
         &:active {
@@ -88,16 +90,19 @@
             height: 100%;
             width: 100%;
             border-radius: 100px;
+              background-color: v.$primary-color;
             position: absolute;
             top: 0;
             left: 0;
             z-index: -1;
-            transition: all .4s;
+            transition: all 1.1s;
+            pointer-events: none;
         }
 
         &:hover::after {
             transform: scaleX(1.4) scaleY(1.6);
             opacity: 0;
+            color: v.$background-color;
         }
 
         &-animated {

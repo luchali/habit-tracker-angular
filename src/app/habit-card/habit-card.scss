@@ -39,16 +39,16 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        border: 2px solid v.$background-color;
+        border: 2px solid v.$primary-color;
 
         background: transparent;
-        color: v.$background-color;
+        color: v.$primary-color;
 
         cursor: pointer;
 
         &--active {
-        background-color: v.$background-color;
-        color: v.$secondary-color;
+        background-color: v.$primary-color;
+        color: v.$background-color;
         }
 
         &:hover{
