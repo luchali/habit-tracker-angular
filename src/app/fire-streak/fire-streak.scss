@@ -1,26 +1,32 @@
 .fire-streak {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 1px;
 
-  &__image {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
+    &__image {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+
+      &--inactive {
+        filter: grayscale(100%);
+        opacity: 0.6;
+      }
     }
 
+
     &__info {
-    display: flex;
-    flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
 
     &__number {
-    font-size: 22px;
-    font-weight: 700;
+      font-size: 22px;
+      font-weight: 700;
     }
 
     &__label {
-    font-size: 13px;
-    color: #777;
+      font-size: 13px;
+      color: #777;
     }
 }

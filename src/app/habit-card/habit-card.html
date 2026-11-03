@@ -14,14 +14,14 @@
         <p class="habit-card__description">
           {{ habit().content }}
         </p>
-        <app-fire-streak [habit]="habit()"></app-fire-streak>
       </div>
   </div>
-
-  <button class="habit-card__button"
-  (click)="deleteHabit.emit(habit().id)"
-  >✕</button>
-
+  <div class="habit-card__section">
+    <app-fire-streak [habit]="habit()"></app-fire-streak>
+    <button class="habit-card__button"
+      (click)="deleteHabit.emit(habit().id)"      
+    >✕</button>
+  </div>
   <!-- <label>
     <input class="habit-card__checkbox" type="checkbox" />
   </label> -->
