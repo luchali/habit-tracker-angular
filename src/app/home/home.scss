@@ -4,13 +4,16 @@
     padding: 1%;
     margin: 0;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, auto);
+    gap: 20px;
     justify-items: center;
 
     &_habitssection{
         margin: 0;
         display: grid;
         grid-template-columns: auto auto;
+        gap: 20px;
     }
     &_title {
         grid-column: 1/-1;
@@ -18,7 +21,7 @@
     }
 
     &_list{
-        grid-column: 1/-1;
+        grid-column: 1/-2;
         background-color: v.$background-color;
         width: max-content;
         height: fit-content;

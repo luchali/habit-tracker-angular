@@ -4,6 +4,10 @@
     <app-habit-form
     (habitCreated)="addHabit($event)"
     ></app-habit-form>
+    <app-habit-statistics
+      [habits]="habits()"
+      [maxStreak]="maxStreak()"
+    ></app-habit-statistics>
 <!-- 
     <div class="streak">
       <img
@@ -22,12 +26,16 @@
         </span>
       </div>
     </div> -->
-    
-    <app-habit-activity
+  </div>
+
+  <div class="home_statisticsection">
+        <app-habit-activity
       [habits]="habits()"
     ></app-habit-activity>
 
-    <div class="home_list">
+  </div>
+
+   <div class="home_list">
       @for (habit of habits(); track habit.id) {
         <app-habit-card 
           [habit]="habit" 
@@ -38,12 +46,4 @@
         <p>No habits yet</p>
       }
     </div>
-  </div>
-
-  <div class="home_statisticsection">
-    <app-habit-statistics
-      [habits]="habits()"
-      [maxStreak]="maxStreak()"
-    ></app-habit-statistics>
-  </div>
 </div>
