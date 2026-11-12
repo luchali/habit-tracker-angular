@@ -1,8 +1,8 @@
 # HabitTracker
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+
 ## Demo link
 [DEMO](https://luchali.github.io/habit-tracker-angular/)
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
 
 ## Development server
 
