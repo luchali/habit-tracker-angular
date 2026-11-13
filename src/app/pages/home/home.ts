@@ -1,10 +1,10 @@
 import { Component, signal, computed } from '@angular/core';
-import { HabitCard } from '../../components/habit-card/habit-card';
-import { Habit } from '../../models/habit.model';
-import { HabitForm } from '../../components/habit-form/habit-form';
-import { calculateStreak } from '../../../utils/calculate-streak';
-import { HabitStatistics } from '../../components/habit-statistics/habit-statistics';
-import { HabitActivity } from '../../components/habit-activity/habit-activity';
+import { HabitCard } from '@components/habit-card/habit-card';
+import { Habit } from '@models/habit.model';
+import { HabitForm } from '@components/habit-form/habit-form';
+import { calculateStreak } from '@utils/calculate-streak';
+import { HabitStatistics } from '@components/habit-statistics/habit-statistics';
+import { HabitActivity } from '@components/habit-activity/habit-activity';
 
 @Component({
   imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity],

@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { Habit } from '../../models/habit.model';
-import { calculateStreak } from '../../../utils/calculate-streak';
+import { Habit } from '@models/habit.model';
+import { calculateStreak } from '@utils/calculate-streak';
 
 
 @Component({

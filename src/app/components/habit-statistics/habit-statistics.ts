@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { Habit } from '../../models/habit.model';
-import { formatDate } from '../../../utils/format-date';
+import { Habit } from '@models/habit.model';
+import { formatDate } from '@utils/format-date';
 
 @Component({
   imports: [],
