@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 // import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
-import { Home } from './home/home';
+import { Home } from './pages/home/home';
 
 @Component({
   imports: [Header, Footer, Home],

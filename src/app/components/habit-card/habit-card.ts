@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
-import { Habit } from '../models/habit.model';
+import { Habit } from '../../models/habit.model';
 import { FireStreak } from '../fire-streak/fire-streak';
-import { formatDate } from '../../utils/format-date';
+import { formatDate } from '../../../utils/format-date';
 
 @Component({
   imports: [FireStreak],
