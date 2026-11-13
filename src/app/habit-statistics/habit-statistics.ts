@@ -1,5 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Habit } from '../models/habit.model';
+import { formatDate } from '../../utils/format-date';
 
 @Component({
   imports: [],
@@ -14,7 +15,7 @@ export class HabitStatistics {
   totalHabits = computed(() => this.habits().length);
 
   completedToday = computed(() => {
-    const today = this.formatDate(new Date());
+    const today = formatDate(new Date());
 
     return this.habits().filter(habit =>
       habit.completedDates.includes(today)
@@ -32,12 +33,4 @@ export class HabitStatistics {
       (this.completedToday() / total) * 100
     );
   });
-
-  private formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  }
 }

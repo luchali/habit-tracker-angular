@@ -1,5 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Habit } from '../models/habit.model';
+import { formatDate } from '../../utils/format-date';
 
 @Component({
   imports: [],
@@ -12,14 +13,6 @@ export class HabitActivity {
 
   days = this.getLast7Days();
 
-  private formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  }
-
   private getLast7Days() {
     const days = [];
 
@@ -29,7 +22,7 @@ export class HabitActivity {
       date.setDate(date.getDate() - i);
 
       days.push({
-        date: this.formatDate(date),
+        date: formatDate(date),
         label: date.toLocaleDateString('en', {
           weekday: 'short',
         }),
@@ -47,7 +40,7 @@ export class HabitActivity {
   isAvailable(habit: Habit, date: string): boolean {
     const createdAt = new Date(habit.createdAt);
 
-    return this.formatDate(createdAt) <= date;
+    return formatDate(createdAt) <= date;
   }
 
   weeklyEfficiency = computed(() => {
