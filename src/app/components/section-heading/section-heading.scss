@@ -1,0 +1,22 @@
+@use 'utils/variables' as v;
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: v.$text-color;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: v.$secondary-color;
+  }
+}

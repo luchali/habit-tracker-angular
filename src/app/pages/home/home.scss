@@ -1,4 +1,4 @@
-@use '../../../utils/variables' as v;
+@use 'utils/variables' as v;
 
 .home {
     padding: 1%;
@@ -17,7 +17,6 @@
     }
     &_title {
         grid-column: 1/-1;
-        text-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
     }
 
     &_list{

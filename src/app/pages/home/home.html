@@ -1,5 +1,9 @@
 <div class="home">
-  <h1 class="home_title">My habits</h1>
+  <app-section-heading
+  class="home_title"
+  title="My Habits"
+  subtitle="Build better habits, one day at a time."
+/>
   <div class="home_habitssection">
     <app-habit-form
     (habitCreated)="addHabit($event)"

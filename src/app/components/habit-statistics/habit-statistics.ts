@@ -1,9 +1,10 @@
 import { Component, computed, input } from '@angular/core';
 import { Habit } from '@models/habit.model';
 import { formatDate } from '@utils/format-date';
+import { SectionHeading } from '../section-heading/section-heading';
 
 @Component({
-  imports: [],
+  imports: [SectionHeading],
   selector: 'app-habit-statistics',
   styleUrl: './habit-statistics.scss',
   templateUrl: './habit-statistics.html',

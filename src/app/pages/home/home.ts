@@ -5,9 +5,10 @@ import { HabitForm } from '@components/habit-form/habit-form';
 import { calculateStreak } from '@utils/calculate-streak';
 import { HabitStatistics } from '@components/habit-statistics/habit-statistics';
 import { HabitActivity } from '@components/habit-activity/habit-activity';
+import { SectionHeading } from '@app/components/section-heading/section-heading';
 
 @Component({
-  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity],
+  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
