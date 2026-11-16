@@ -6,9 +6,10 @@ import { calculateStreak } from '@utils/calculate-streak';
 import { HabitStatistics } from '@components/habit-statistics/habit-statistics';
 import { HabitActivity } from '@components/habit-activity/habit-activity';
 import { SectionHeading } from '@app/components/section-heading/section-heading';
+import { UiCard } from '@app/components/ui-card/ui-card';
 
 @Component({
-  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading],
+  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',

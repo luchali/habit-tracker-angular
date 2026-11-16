@@ -6,13 +6,13 @@
     align-items: flex-start;
     gap: 3px;
 
-     background-color: v.$background-color;
-        width: max-content;
-        height: fit-content;
-        padding: 15px;
-        border-radius: 33px;
-        box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
-        margin-block: 5px;
+    width: max-content;
+    height: fit-content;
+    //  background-color: v.$background-color;
+    //     padding: 15px;
+    //     border-radius: 33px;
+    //     box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
+    //     margin-block: 5px;
 
     &_p{
         margin: 0;

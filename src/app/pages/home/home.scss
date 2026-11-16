@@ -21,13 +21,13 @@
 
     &_list{
         grid-column: 1/-2;
-        background-color: v.$background-color;
+        // background-color: v.$background-color;
         width: max-content;
         height: fit-content;
-        padding: 10px;
-        margin-block: 5px;
-        border-radius: 33px;
-        box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
+        // padding: 10px;
+        // margin-block: 5px;
+        // border-radius: 33px;
+        // box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
     }
 }
 

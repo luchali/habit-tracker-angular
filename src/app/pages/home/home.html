@@ -5,13 +5,19 @@
   subtitle="Build better habits, one day at a time."
 />
   <div class="home_habitssection">
-    <app-habit-form
-    (habitCreated)="addHabit($event)"
-    ></app-habit-form>
+    <app-ui-card>
+      <app-habit-form
+        (habitCreated)="addHabit($event)"
+      ></app-habit-form>
+    </app-ui-card>
+
+    <app-ui-card>
     <app-habit-statistics
       [habits]="habits()"
       [maxStreak]="maxStreak()"
     ></app-habit-statistics>
+    </app-ui-card>
+
 <!-- 
     <div class="streak">
       <img
@@ -33,13 +39,16 @@
   </div>
 
   <div class="home_statisticsection">
-        <app-habit-activity
+    <app-ui-card>
+    <app-habit-activity
       [habits]="habits()"
     ></app-habit-activity>
+    </app-ui-card>
 
   </div>
 
    <div class="home_list">
+    <app-ui-card>
       @for (habit of habits(); track habit.id) {
         <app-habit-card 
           [habit]="habit" 
@@ -49,5 +58,6 @@
       } @empty {
         <p>No habits yet</p>
       }
-    </div>
+    </app-ui-card>   
+   </div>
 </div>
