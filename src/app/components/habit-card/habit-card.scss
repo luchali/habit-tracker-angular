@@ -29,6 +29,7 @@
         background-color: v.$primary-color;
         border: 1px solid v.$background-color;
         border-radius: 50%;
+        cursor: pointer;
 
         &:hover{
             background-color: v.$danger-color;
