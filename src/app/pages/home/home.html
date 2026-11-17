@@ -4,14 +4,14 @@
   title="My Habits"
   subtitle="Build better habits, one day at a time."
 />
-  <div class="home_habitssection">
-    <app-ui-card>
+  <div class="home__habitssection">
+    <app-ui-card class="home__form">
       <app-habit-form
         (habitCreated)="addHabit($event)"
       ></app-habit-form>
     </app-ui-card>
 
-    <app-ui-card>
+    <app-ui-card class="home__statistics">
     <app-habit-statistics
       [habits]="habits()"
       [maxStreak]="maxStreak()"

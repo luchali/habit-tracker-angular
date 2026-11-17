@@ -11,10 +11,7 @@
     bottom: 0px;
     position: relative;
     width: stretch;
-    // border-top: 1px solid v.$primary-color;
-    // box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.419);
-    // box-shadow: -1px 0px 20px 0px rgba(0, 0, 0, 0.419);
-    box-shadow: -1px 4px 20px 0px v.$primary-color;;
+    box-shadow: 0px 12px 20px 0px v.$primary-color;;
 
     &_logo{
         height: 100%;
@@ -26,9 +23,8 @@
         cursor: pointer;
 
         &:hover {
-            text-shadow: 0px 0px 11px v.$primary-color;
-            transform: scale(1.04);
-            color: v.$secondary-color;
+            transform: scale(1.02);
+                text-decoration-line: underline;
         }
     }
 }

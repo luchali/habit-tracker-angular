@@ -1,16 +1,23 @@
+@use 'utils/mixins' as m;
+@use 'utils/variables' as v;
+
 :host {
   display: block;
+//   width: 100%;
   min-width: 0;
 }
 
 .card {
-//   height: 100%;
+  min-width: 0;
   padding: 24px;
+  box-sizing: border-box;
 
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: v.$uicard-color;
+  border: 1px solid v.$uicardborder-color;
   border-radius: 20px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 
-  box-sizing: border-box;
+  @include m.mobile {
+    padding: 16px;
+  }
 }
