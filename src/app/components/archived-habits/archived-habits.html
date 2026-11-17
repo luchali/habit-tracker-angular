@@ -1,0 +1,36 @@
+<section class="archived">
+  <header class="archived__header">
+    <h2>Archived Habits</h2>
+    <span class="archived__count">
+      {{ habits().length }}
+    </span>
+  </header>
+
+  @for (habit of habits(); track habit.id) {
+    <div class="archived__item">
+      <div class="archived__info">
+        <h3>{{ habit.title }}</h3>
+
+        @if (habit.content) {
+          <p>{{ habit.content }}</p>
+        }
+
+        <span class="archived__badge">
+          Archived
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="archived__restore"
+        (click)="restoreHabit.emit(habit.id)"
+      >
+        Restore
+      </button>
+    </div>
+  } @empty {
+    <p class="archived__empty">
+      No archived habits yet.
+    </p>
+  }
+</section>

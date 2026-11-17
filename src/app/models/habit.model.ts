@@ -5,4 +5,6 @@ export interface Habit {
     createdAt: Date;
     completedToday: boolean;
     completedDates: string[];
+    archived?: boolean;
+    archivedAt?: string;
 }

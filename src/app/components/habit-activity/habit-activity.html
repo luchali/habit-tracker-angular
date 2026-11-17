@@ -25,10 +25,18 @@
       @for (habit of habits(); track habit.id) {
         <div class="activity__row">
 
-          <span class="activity__habit" [title]="habit.title">
-            {{ habit.title }}
-          </span>
+          <div class="activity__habit">
+            <span [title]="habit.title">
+              {{ habit.title }}
+            </span>
 
+            @if (habit.archived) {
+              <span class="activity__badge">
+                Archived
+              </span>
+            }
+          </div>
+          
           @for (day of days; track day.date) {
             <div
               class="activity__cell"

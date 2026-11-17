@@ -160,5 +160,25 @@
     background: v.$primary-color;
     border-radius: inherit;
     transition: width 0.3s ease;
+  } 
+  
+  &__habit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
   }
+
+  &__badge {
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: v.$background-color;
+    color: v.$border-color;
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+
 }

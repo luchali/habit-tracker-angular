@@ -49,15 +49,84 @@
 
    <div class="home_list">
     <app-ui-card>
-      @for (habit of habits(); track habit.id) {
+      @for (habit of activeHabits(); track habit.id) {
         <app-habit-card 
           [habit]="habit" 
           (toggleCompleted)="toggleHabit($event)" 
           (deleteHabit)="deleteHabit($event)"
+          (editHabit)="openEditHabit($event)"
+          (archiveHabit)="archiveHabit($event)"
         ></app-habit-card>
       } @empty {
         <p>No habits yet</p>
       }
     </app-ui-card>   
    </div>
+
+  @if (editingHabit()) {
+  <div class="edit-overlay" (click)="closeEditHabit()">
+    <div
+      class="edit-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-habit-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="edit-modal__header">
+        <h2 id="edit-habit-title">Edit habit</h2>
+
+        <button
+          type="button"
+          aria-label="Close editor"
+          (click)="closeEditHabit()"
+        >
+          ✕
+        </button>
+      </div>
+
+      <form (submit)="saveEditedHabit(); $event.preventDefault()">
+        <label for="edit-title">Habit name</label>
+
+        <input
+          id="edit-title"
+          type="text"
+          maxlength="30"
+          required
+          [value]="editTitle()"
+          (input)="editTitle.set($any($event.target).value)"
+        />
+
+        <label for="edit-content">Description</label>
+
+        <input
+          id="edit-content"
+          type="text"
+          [value]="editContent()"
+          (input)="editContent.set($any($event.target).value)"
+        />
+
+        <div class="edit-modal__actions">
+          <button type="button" (click)="closeEditHabit()">
+            Cancel
+          </button>
+
+          <button type="submit" [disabled]="!editTitle().trim()">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (archivedHabits().length > 0) {
+  <div class="home__archive">
+    <app-ui-card>
+      <app-archived-habits
+        [habits]="archivedHabits()"
+        (restoreHabit)="restoreHabit($event)"
+      />
+    </app-ui-card>
+  </div>
+}
 </div>

@@ -7,15 +7,26 @@ import { HabitStatistics } from '@components/habit-statistics/habit-statistics';
 import { HabitActivity } from '@components/habit-activity/habit-activity';
 import { SectionHeading } from '@app/components/section-heading/section-heading';
 import { UiCard } from '@app/components/ui-card/ui-card';
+import { ArchivedHabits } from '@app/components/archived-habits/archived-habits';
 
 @Component({
-  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard],
+  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard, ArchivedHabits],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
 })
 export class Home {
   protected readonly habits = signal<Habit[]>(this.loadHabits());
+  protected readonly activeHabits = computed(() =>
+    this.habits().filter(habit => !habit.archived)
+  );
+  protected readonly archivedHabits = computed(() =>
+    this.habits().filter(habit => habit.archived === true)
+  );
+
+  protected readonly editingHabit = signal<Habit | null>(null);
+  protected readonly editTitle = signal('');
+  protected readonly editContent = signal('');
 
   addHabit(data: { title: string; content: string }) {
     const newHabit: Habit = {
@@ -122,6 +133,75 @@ export class Home {
 
     this.habits.update(habits =>
       habits.filter(habit => habit.id !== id)
+    );
+
+    this.saveHabits(this.habits());
+  }
+
+  openEditHabit(id: number): void {
+    const habit = this.habits().find(habit => habit.id === id);
+
+    if (!habit) {
+      return;
+    }
+
+    this.editingHabit.set(habit);
+    this.editTitle.set(habit.title);
+    this.editContent.set(habit.content);
+  }
+
+  closeEditHabit(): void {
+    this.editingHabit.set(null);
+  }
+
+  saveEditedHabit(): void {
+    const habit = this.editingHabit();
+    const title = this.editTitle().trim();
+    const content = this.editContent().trim();
+
+    if (!habit || !title) {
+      return;
+    }
+
+    this.habits.update(habits =>
+      habits.map(item =>
+        item.id === habit.id
+          ? {
+              ...item,
+              title,
+              content,
+            }
+          : item
+      )
+    );
+
+    this.saveHabits(this.habits());
+    this.closeEditHabit();
+  }
+
+  archiveHabit(id: number): void {
+    this.habits.update(habits =>
+      habits.map(habit =>
+        habit.id === id
+          ? { ...habit, archived: true, archivedAt: new Date().toISOString(), }
+          : habit
+      )
+    );
+
+    this.saveHabits(this.habits());
+  }
+
+  restoreHabit(id: number): void {
+    this.habits.update(habits =>
+      habits.map(habit =>
+        habit.id === id
+          ? {
+              ...habit,
+              archived: false,
+              archivedAt: undefined,
+            }
+          : habit
+      )
     );
 
     this.saveHabits(this.habits());

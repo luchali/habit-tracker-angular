@@ -39,9 +39,19 @@ export class HabitActivity {
   }
 
   isAvailable(habit: Habit, date: string): boolean {
-    const createdAt = new Date(habit.createdAt);
+    const createdAt = formatDate(new Date(habit.createdAt));
 
-    return formatDate(createdAt) <= date;
+  if (date < createdAt) {
+    return false;
+  }
+
+  if (habit.archived && habit.archivedAt) {
+    const archivedAt = formatDate(new Date(habit.archivedAt));
+
+    return date <= archivedAt;
+  }
+
+  return true;
   }
 
   weeklyEfficiency = computed(() => {

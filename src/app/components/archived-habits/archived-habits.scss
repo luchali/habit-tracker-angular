@@ -1,0 +1,77 @@
+@use 'utils/variables' as v;
+
+.archived {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+  }
+
+  &__count {
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: v.$background-color;
+    color: v.$secondary-color;
+    font-size: 12px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid v.$border-color;
+  }
+
+  &__info {
+    min-width: 0;
+
+    h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      margin: 0 0 8px;
+      color: v.$secondary-color;
+      font-size: 13px;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 4px 9px;
+    background: v.$background-color;
+    border-radius: 8px;
+    color: v.$secondary-color;
+    font-size: 11px;
+  }
+
+  &__restore {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid v.$border-color;
+    border-radius: 10px;
+    color: v.$primary-color;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background: v.$background-color;
+    }
+  }
+
+  &__empty {
+    color: v.$secondary-color;
+    font-size: 14px;
+  }
+}
