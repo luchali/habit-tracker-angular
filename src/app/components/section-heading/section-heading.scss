@@ -10,13 +10,13 @@
     font-size: 28px;
     font-weight: 700;
     line-height: 1.2;
-    color: v.$text-color;
+    color: v.$text-primary;
   }
 
   &__subtitle {
     margin: 0;
     font-size: 14px;
     line-height: 1.5;
-    color: v.$secondary-color;
+    color: v.$text-secondary;
   }
 }
