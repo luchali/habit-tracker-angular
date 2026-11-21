@@ -8,9 +8,10 @@ import { HabitActivity } from '@components/habit-activity/habit-activity';
 import { SectionHeading } from '@app/components/section-heading/section-heading';
 import { UiCard } from '@app/components/ui-card/ui-card';
 import { ArchivedHabits } from '@app/components/archived-habits/archived-habits';
+import { HeroSection } from '@app/components/hero-section/hero-section';
 
 @Component({
-  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard, ArchivedHabits],
+  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard, ArchivedHabits, HeroSection],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
@@ -205,5 +206,20 @@ export class Home {
     );
 
     this.saveHabits(this.habits());
+  }
+  
+  protected readonly isAddModalOpen = signal(false);
+
+  openAddModal(): void {
+    this.isAddModalOpen.set(true);
+  }
+
+  closeAddModal(): void {
+    this.isAddModalOpen.set(false);
+  }
+
+  onHabitCreated(data: { title: string; content: string }): void {
+    this.addHabit(data);
+    this.closeAddModal();
   }
 }

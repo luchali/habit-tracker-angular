@@ -1,15 +1,19 @@
 <div class="home">
-  <app-section-heading
+  <!-- <app-section-heading
   class="home_title"
   title="My Habits"
   subtitle="Build better habits, one day at a time."
-/>
+/> -->
+  <app-hero-section
+    class="home__hero"
+    (addClicked)="openAddModal()"
+  />
   <div class="home__habitssection">
-    <app-ui-card class="home__form">
+    <!-- <app-ui-card class="home__form">
       <app-habit-form
         (habitCreated)="addHabit($event)"
       ></app-habit-form>
-    </app-ui-card>
+    </app-ui-card> -->
 
     <app-ui-card class="home__statistics">
     <app-habit-statistics
@@ -127,6 +131,34 @@
         (restoreHabit)="restoreHabit($event)"
       />
     </app-ui-card>
+  </div>
+}
+
+@if (isAddModalOpen()) {
+  <div class="edit-overlay" (click)="closeAddModal()">
+    <div
+      class="edit-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="add-habit-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="edit-modal__header">
+        <h2 id="add-habit-title">Add New Habit</h2>
+
+        <button
+          type="button"
+          aria-label="Close add habit dialog"
+          (click)="closeAddModal()"
+        >
+          ✕
+        </button>
+      </div>
+
+      <app-habit-form
+        (habitCreated)="onHabitCreated($event)"
+      />
+    </div>
   </div>
 }
 </div>
