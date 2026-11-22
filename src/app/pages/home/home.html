@@ -8,19 +8,18 @@
     class="home__hero"
     (addClicked)="openAddModal()"
   />
-  <div class="home__habitssection">
+
     <!-- <app-ui-card class="home__form">
       <app-habit-form
         (habitCreated)="addHabit($event)"
       ></app-habit-form>
     </app-ui-card> -->
 
-    <app-ui-card class="home__statistics">
     <app-habit-statistics
+      class="home__statistics"
       [habits]="habits()"
       [maxStreak]="maxStreak()"
     ></app-habit-statistics>
-    </app-ui-card>
 
 <!-- 
     <div class="streak">
@@ -40,7 +39,6 @@
         </span>
       </div>
     </div> -->
-  </div>
 
   <div class="home_statisticsection">
     <app-ui-card>

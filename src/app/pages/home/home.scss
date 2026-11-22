@@ -3,7 +3,7 @@
 
 .home {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   padding: 24px;
   align-items: start;
@@ -13,6 +13,7 @@
   }
 
   &_habitssection {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr);
     gap: 24px;
@@ -26,15 +27,11 @@
     width: fit-content;
     max-width: 100%;
   }
-
-  &__statistics {
+ 
+  &_list,
+  &_statisticsection {
     min-width: 0;
-  }
-
-  &_list {
-    grid-column: 1 / -1;
-    width: min(100%, 620px);
-    min-width: 0;
+    width: 100%;
   }
 
   @include m.desktop {
@@ -58,15 +55,21 @@
     }
   }
 
- &__archive {
+  &__hero,
+  &__statistics,
+  &__archive {
     grid-column: 1 / -1;
-    width: 100%;
     min-width: 0;
   }
-   &__hero {
-    display: block;
-    grid-column: 1 / -1;
-    margin-bottom: 8px;
+  
+  @include m.desktop {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  @include m.mobile {
+    gap: 16px;
+    padding: 16px;
   }
 }
 

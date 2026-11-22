@@ -1,0 +1,42 @@
+<article
+  class="stat-card"
+  [class.stat-card--success]="variant() === 'success'"
+>
+  <div class="stat-card__header">
+    <h3 class="stat-card__title">
+      {{ title() }}
+    </h3>
+
+    <div class="stat-card__icon" aria-hidden="true">
+      {{ icon() }}
+    </div>
+  </div>
+
+  <div class="stat-card__body">
+    <strong class="stat-card__value">
+      {{ value() }}
+    </strong>
+
+    @if (description()) {
+      <p class="stat-card__description">
+        {{ description() }}
+      </p>
+    }
+  </div>
+
+  @if (progress() !== null) {
+    <div
+      class="stat-card__progress"
+      role="progressbar"
+      [attr.aria-label]="title()"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [attr.aria-valuenow]="progress()"
+    >
+      <div
+        class="stat-card__progress-fill"
+        [style.width.%]="progress()"
+      ></div>
+    </div>
+  }
+</article>
