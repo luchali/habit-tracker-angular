@@ -1,11 +1,12 @@
+@use 'utils/variables' as v;
+
 .fire-streak {
   display: flex;
   align-items: center;
-  gap: 1px;
 
     &__image {
-      width: 42px;
-      height: 42px;
+      width: 26px;
+      height: 26px;
       object-fit: contain;
 
       &--inactive {
@@ -17,16 +18,18 @@
 
     &__info {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      gap: 5px;
+      align-items: center;
     }
 
     &__number {
-      font-size: 22px;
+      font-size: 17px;
       font-weight: 700;
     }
 
     &__label {
       font-size: 13px;
-      color: #777;
+      color: v.$text-secondary;
     }
 }

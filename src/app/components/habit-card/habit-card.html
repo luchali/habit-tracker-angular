@@ -1,30 +1,4 @@
 <!-- <div class="habit-card">
-  <div class="habit-card__section">
-      <app-fire-streak [habit]="habit()"></app-fire-streak>
-      <div class="habit-card__content">
-        <h3 class="habit-card__title">
-          {{ habit().title }}
-        </h3>
-
-        <p class="habit-card__description">
-          {{ habit().content }}
-        </p>
-      </div>
-  </div>
-  <div class="habit-card__section">
-    <button class="habit-card__button"
-      (click)="deleteHabit.emit(habit().id)"      
-    >✕</button>
-
-        <button 
-        class="habit-card__check"
-        [class.habit-card__check--active]="isCompletedToday()"
-        (click)="toggleCompleted.emit(habit().id)"
-      >✓</button>
-  </div>
-</div> -->
-
-<div class="habit-card">
   <div class="habit-card__main">
     <div class="habit-card__content">
       <h3 class="habit-card__title">
@@ -96,6 +70,98 @@
       (click)="toggleCompleted.emit(habit().id)"
     >
       ✓
+    </button>
+  </div>
+</div> -->
+<div
+  class="habit-card"
+  [class.habit-card--completed]="isCompletedToday()"
+>
+  <div class="habit-card__main">
+    <div class="habit-card__icon" aria-hidden="true">
+      <span>✦</span>
+    </div>
+
+    <div class="habit-card__content">
+      <h3 class="habit-card__title" [title]="habit().title">
+        {{ habit().title }}
+      </h3>
+
+      @if (habit().content) {
+        <p class="habit-card__description">
+          {{ habit().content }}
+        </p>
+      }
+
+      <div class="habit-card__meta">
+        <app-fire-streak [habit]="habit()" />
+
+        @if (isCompletedToday()) {
+          <span class="habit-card__status">
+            Completed today
+          </span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="habit-card__actions">
+    <div #menuWrapper class="habit-card__menu-wrapper">
+      <button
+        type="button"
+        class="habit-card__menu-button"
+        aria-label="Open habit actions"
+        aria-haspopup="true"
+        [attr.aria-expanded]="menuOpen()"
+        (click)="toggleMenu()"
+      >
+        ⋯
+      </button>
+
+      @if (menuOpen()) {
+        <div class="habit-card__menu">
+          <button
+            type="button"
+            class="habit-card__menu-item"
+            (click)="onEditHabit()"
+          >
+            ✎ <span>Edit habit</span>
+          </button>
+
+          <button
+            type="button"
+            class="habit-card__menu-item"
+            (click)="onArchiveHabit()"
+          >
+            ▣ <span>Archive</span>
+          </button>
+
+          <div class="habit-card__menu-divider"></div>
+
+          <button
+            type="button"
+            class="habit-card__menu-item habit-card__menu-item--danger"
+            (click)="onDeleteHabit()"
+          >
+            ✕ <span>Delete</span>
+          </button>
+        </div>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="habit-card__check"
+      [class.habit-card__check--active]="isCompletedToday()"
+      [attr.aria-pressed]="isCompletedToday()"
+      [attr.aria-label]="
+        isCompletedToday()
+          ? 'Mark ' + habit().title + ' as incomplete'
+          : 'Mark ' + habit().title + ' as completed'
+      "
+      (click)="toggleCompleted.emit(habit().id)"
+    >
+      <span aria-hidden="true">✓</span>
     </button>
   </div>
 </div>

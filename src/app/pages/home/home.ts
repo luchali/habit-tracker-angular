@@ -112,7 +112,7 @@ export class Home {
   }
 
   maxStreak = computed(() => {
-  const habits = this.habits();
+  const habits = this.activeHabits();
 
   if (!habits.length) {
     return 0;

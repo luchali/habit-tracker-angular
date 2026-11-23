@@ -51,19 +51,33 @@
 
    <div class="home_list">
     <app-ui-card>
-      @for (habit of activeHabits(); track habit.id) {
-        <app-habit-card 
-          [habit]="habit" 
-          (toggleCompleted)="toggleHabit($event)" 
-          (deleteHabit)="deleteHabit($event)"
-          (editHabit)="openEditHabit($event)"
-          (archiveHabit)="archiveHabit($event)"
-        ></app-habit-card>
-      } @empty {
-        <p>No habits yet</p>
-      }
-    </app-ui-card>   
-   </div>
+      <div class="home__list-header">
+        <h2 class="home__list-title">
+          Active Habits
+        </h2>
+
+        <span class="home__list-count">
+          {{ activeHabits().length }} Active
+        </span>
+      </div>
+
+    <div class="home__list-items">
+        @for (habit of activeHabits(); track habit.id) {
+          <app-habit-card
+            [habit]="habit"
+            (toggleCompleted)="toggleHabit($event)"
+            (deleteHabit)="deleteHabit($event)"
+            (editHabit)="openEditHabit($event)"
+            (archiveHabit)="archiveHabit($event)"
+          />
+        } @empty {
+          <p class="home__list-empty">
+            No active habits yet. Create your first habit!
+          </p>
+        }
+      </div>
+    </app-ui-card>
+  </div>
 
   @if (editingHabit()) {
   <div class="edit-overlay" (click)="closeEditHabit()">
