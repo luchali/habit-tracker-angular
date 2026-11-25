@@ -11,7 +11,8 @@ import { SectionHeading } from '../section-heading/section-heading';
 })
 export class HabitActivity {
   habits = input.required<Habit[]>();
-
+  
+  today = formatDate(new Date());
   days = this.getLast7Days();
 
   private getLast7Days() {

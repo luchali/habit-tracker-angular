@@ -9,9 +9,13 @@ import { SectionHeading } from '@app/components/section-heading/section-heading'
 import { UiCard } from '@app/components/ui-card/ui-card';
 import { ArchivedHabits } from '@app/components/archived-habits/archived-habits';
 import { HeroSection } from '@app/components/hero-section/hero-section';
+import {
+  HabitModal,
+  HabitFormData,
+} from '@components/habit-modal/habit-modal';
 
 @Component({
-  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, SectionHeading, UiCard, ArchivedHabits, HeroSection],
+  imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, UiCard, ArchivedHabits, HeroSection, HabitModal],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
@@ -139,17 +143,62 @@ export class Home {
     this.saveHabits(this.habits());
   }
 
-  openEditHabit(id: number): void {
-    const habit = this.habits().find(habit => habit.id === id);
+  // openEditHabit(id: number): void {
+  //   const habit = this.habits().find(habit => habit.id === id);
 
-    if (!habit) {
-      return;
-    }
+  //   if (!habit) {
+  //     return;
+  //   }
 
-    this.editingHabit.set(habit);
-    this.editTitle.set(habit.title);
-    this.editContent.set(habit.content);
+  //   this.editingHabit.set(habit);
+  //   this.editTitle.set(habit.title);
+  //   this.editContent.set(habit.content);
+  // }
+
+  openAddModal(): void {
+  this.editingHabit.set(null);
+  this.isAddModalOpen.set(true);
+}
+
+openEditHabit(id: number): void {
+  const habit = this.habits().find(item => item.id === id);
+
+  if (!habit) {
+    return;
   }
+
+  this.isAddModalOpen.set(false);
+  this.editingHabit.set(habit);
+}
+
+closeHabitModal(): void {
+  this.isAddModalOpen.set(false);
+  this.editingHabit.set(null);
+}
+
+saveHabitFromModal(data: HabitFormData): void {
+  const editingHabit = this.editingHabit();
+
+  if (editingHabit) {
+    this.habits.update(habits =>
+      habits.map(habit =>
+        habit.id === editingHabit.id
+          ? {
+              ...habit,
+              title: data.title,
+              content: data.content,
+            }
+          : habit
+      )
+    );
+
+    this.saveHabits(this.habits());
+  } else {
+    this.addHabit(data);
+  }
+
+  this.closeHabitModal();
+}
 
   closeEditHabit(): void {
     this.editingHabit.set(null);
@@ -210,9 +259,9 @@ export class Home {
   
   protected readonly isAddModalOpen = signal(false);
 
-  openAddModal(): void {
-    this.isAddModalOpen.set(true);
-  }
+  // openAddModal(): void {
+  //   this.isAddModalOpen.set(true);
+  // }
 
   closeAddModal(): void {
     this.isAddModalOpen.set(false);

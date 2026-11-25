@@ -1,0 +1,108 @@
+<dialog
+  #dialog
+  class="habit-modal"
+  aria-labelledby="habit-modal-title"
+  (close)="onClosed()"
+  (click)="onBackdropClick($event)"
+>
+  <div class="habit-modal__content">
+    <div class="habit-modal__handle"></div>
+
+    <div class="habit-modal__header">
+      <div class="habit-modal__icon" aria-hidden="true">
+        ✓
+      </div>
+
+      <div class="habit-modal__heading">
+        <h2 id="habit-modal-title">
+          {{ isEditing() ? 'Edit Habit' : 'Add New Habit' }}
+        </h2>
+
+        <p>
+          {{
+            isEditing()
+              ? 'Make changes to your daily routine'
+              : 'Small daily wins compound into greatness'
+          }}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="habit-modal__close"
+        aria-label="Close dialog"
+        (click)="close()"
+      >
+        ✕
+      </button>
+    </div>
+
+    <form
+      class="habit-modal__form"
+      (submit)="submit($event)"
+    >
+      <div class="habit-modal__field">
+        <div class="habit-modal__label-row">
+          <label for="habit-title">
+            Habit title
+          </label>
+
+          <span>Required</span>
+        </div>
+
+        <input
+          id="habit-title"
+          type="text"
+          maxlength="30"
+          required
+          autofocus
+          placeholder="e.g. Read 20 pages"
+          [value]="title()"
+          (input)="title.set($any($event.target).value)"
+        />
+      </div>
+
+      <div class="habit-modal__field">
+        <label for="habit-description">
+          Habit description
+        </label>
+
+        <textarea
+          id="habit-description"
+          rows="3"
+          placeholder="Describe your habit or set a reminder cue..."
+          [value]="content()"
+          (input)="content.set($any($event.target).value)"
+        ></textarea>
+      </div>
+
+      <div class="habit-modal__tip">
+        <span aria-hidden="true">💡</span>
+        <p>
+          Start with one small action that you can
+          repeat consistently.
+        </p>
+      </div>
+
+      <div class="habit-modal__actions">
+        @if (isEditing()) {
+          <button
+            type="button"
+            class="habit-modal__cancel"
+            (click)="close()"
+          >
+            Cancel
+          </button>
+        }
+
+        <button
+          type="submit"
+          class="habit-modal__submit"
+          [disabled]="!title().trim()"
+        >
+          {{ isEditing() ? 'Save changes' : '+ Add habit' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
