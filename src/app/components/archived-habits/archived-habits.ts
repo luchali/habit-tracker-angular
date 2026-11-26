@@ -12,9 +12,14 @@ export class ArchivedHabits {
   habits = input.required<Habit[]>();
   restoreHabit = output<number>();
   isExpanded = signal(true);
+  deleteHabit = output<number>();
 
   toggleArchive(): void {
     this.isExpanded.update(value => !value);
+  }
+
+  onDeleteHabit(id: number): void {
+    this.deleteHabit.emit(id);
   }
 
   onRestore(id: number): void {

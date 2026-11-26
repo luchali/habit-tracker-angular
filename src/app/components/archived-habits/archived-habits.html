@@ -92,6 +92,15 @@
               }
             </div>
           </div>
+          
+          <button
+            type="button"
+            class="archive__delete"
+            [attr.aria-label]="'Delete ' + habit.title"
+            (click)="onDeleteHabit(habit.id)"
+          >
+            ✕ <span>Delete</span>
+          </button>
 
           <button
             type="button"

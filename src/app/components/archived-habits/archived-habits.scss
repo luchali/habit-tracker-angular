@@ -233,6 +233,35 @@
     }
   }
 
+  &__delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 9px 13px;
+
+  background: v.$danger-light;
+  border: 1px solid transparent;
+  border-radius: v.$radius-sm;
+
+  color: v.$danger-color;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  &:hover {
+    background: v.$danger-hover-color;
+    border-color: v.$danger-color;
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$danger-color;
+    outline-offset: 2px;
+  }
+}
+
   &__empty {
     margin: 0;
     padding: 20px;
