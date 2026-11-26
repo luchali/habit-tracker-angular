@@ -78,8 +78,30 @@
   [class.habit-card--completed]="isCompletedToday()"
 >
   <div class="habit-card__main">
-    <div class="habit-card__icon" aria-hidden="true">
-      <span>✦</span>
+    <div
+      class="habit-card__icon"
+      [style.color]="habit().color ?? '#2861c4'"
+      [style.background-color]="
+        'color-mix(in srgb, ' +
+        (habit().color ?? '#2861c4') +
+        ' 12%, white)'
+      "
+      aria-hidden="true"
+    >
+      @switch (habit().icon) {
+        @case ('dumbbell') {
+          <span>🏋️</span>
+        }
+        @case ('book-open') {
+          <span>📖</span>
+        }
+        @case ('moon') {
+          <span>🌙</span>
+        }
+        @default {
+          <span>💧</span>
+        }
+      }
     </div>
 
     <div class="habit-card__content">
@@ -149,7 +171,7 @@
       }
     </div>
 
-    <button
+    <!-- <button
       type="button"
       class="habit-card__check"
       [class.habit-card__check--active]="isCompletedToday()"
@@ -160,8 +182,44 @@
           : 'Mark ' + habit().title + ' as completed'
       "
       (click)="toggleCompleted.emit(habit().id)"
+      [disabled]="!isScheduledToday()"
     >
       <span aria-hidden="true">✓</span>
-    </button>
+    </button> -->
+    <div class="habit-card__check-wrapper">
+      <button
+        type="button"
+        class="habit-card__check"
+        [class.habit-card__check--active]="isCompletedToday()"
+        [class.habit-card__check--unscheduled]="!isScheduledToday()"
+        [attr.aria-pressed]="isCompletedToday()"
+        [attr.aria-describedby]="
+          !isScheduledToday() && !isCompletedToday()
+            ? 'habit-tooltip-' + habit().id
+            : null
+        "
+        [attr.aria-label]="
+          isCompletedToday()
+            ? 'Mark ' + habit().title + ' as incomplete'
+            : !isScheduledToday()
+              ? 'Mark ' + habit().title + ' as completed outside its schedule'
+              : 'Mark ' + habit().title + ' as completed'
+        "
+        (click)="toggleCompleted.emit(habit().id)"
+      >
+        <span aria-hidden="true">✓</span>
+      </button>
+
+      @if (!isScheduledToday() && !isCompletedToday()) {
+        <span
+          class="habit-card__tooltip"
+          [id]="'habit-tooltip-' + habit().id"
+          role="tooltip"
+        >
+          Not scheduled today.
+          Click to mark as done anyway.
+        </span>
+      }
+    </div>
   </div>
 </div>

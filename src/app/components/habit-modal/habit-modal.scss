@@ -224,6 +224,114 @@
     }
   }
 
+  &__frequency {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+
+  padding: 4px;
+  border-radius: v.$radius-md;
+  background: v.$primary-light;
+
+  button {
+    padding: 11px 6px;
+
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+
+    color: v.$text-secondary;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.is-active {
+      background: v.$uicard-color;
+      color: v.$primary-color;
+      box-shadow: v.$shadow-card;
+    }
+  }
+}
+
+&__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+
+  button {
+    min-width: 0;
+    padding: 10px 0;
+
+    border: 1px solid v.$uicardborder-color;
+    border-radius: 8px;
+    background: v.$uicard-color;
+
+    color: v.$text-secondary;
+    font-size: 11px;
+    cursor: pointer;
+
+    &.is-active {
+      background: v.$primary-color;
+      border-color: v.$primary-color;
+      color: white;
+    }
+  }
+}
+
+&__icons,
+&__colors {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+&__icons {
+  button {
+    display: grid;
+    place-items: center;
+
+    width: 46px;
+    height: 46px;
+
+    background: v.$primary-light;
+    border: 2px solid transparent;
+    border-radius: v.$radius-md;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    &.is-active {
+      border-color: v.$primary-color;
+      background: v.$uicard-color;
+    }
+  }
+}
+
+&__color {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 3px solid transparent;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+
+  &.is-active {
+    outline: 2px solid v.$text-primary;
+    outline-offset: 3px;
+  }
+}
+
+&__error {
+  margin: 0;
+  color: v.$danger-color;
+  font-size: 12px;
+}
+
   @include m.mobile {
     width: 100%;
     max-width: 100%;

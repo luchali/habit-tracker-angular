@@ -76,6 +76,96 @@
         ></textarea>
       </div>
 
+      <div class="habit-modal__field">
+        <label>Frequency</label>
+
+        <div class="habit-modal__frequency">
+            <button
+            type="button"
+            [class.is-active]="frequency() === 'daily'"
+            [attr.aria-pressed]="frequency() === 'daily'"
+            (click)="frequency.set('daily')"
+            >
+            Daily
+            </button>
+
+            <button
+            type="button"
+            [class.is-active]="frequency() === 'weekdays'"
+            [attr.aria-pressed]="frequency() === 'weekdays'"
+            (click)="frequency.set('weekdays')"
+            >
+            Weekdays
+            </button>
+
+            <button
+            type="button"
+            [class.is-active]="frequency() === 'custom'"
+            [attr.aria-pressed]="frequency() === 'custom'"
+            (click)="frequency.set('custom')"
+            >
+            Custom
+            </button>
+        </div>
+
+        @if (frequency() === 'custom') {
+            <div class="habit-modal__days">
+            @for (day of weekdays; track day.value) {
+                <button
+                type="button"
+                [class.is-active]="customDays().includes(day.value)"
+                [attr.aria-pressed]="customDays().includes(day.value)"
+                (click)="toggleCustomDay(day.value)"
+                >
+                {{ day.label }}
+                </button>
+            }
+            </div>
+
+            @if (customDays().length === 0) {
+            <p class="habit-modal__error">
+                Select at least one day.
+            </p>
+            }
+        }
+        </div>
+
+        <div class="habit-modal__field">
+        <label>Icon & Color Tag</label>
+
+        <div class="habit-modal__icons">
+            @for (icon of icons; track icon.value) {
+            <button
+                type="button"
+                [class.is-active]="selectedIcon() === icon.value"
+                [attr.aria-label]="'Select ' + icon.value + ' icon'"
+                [attr.aria-pressed]="selectedIcon() === icon.value"
+                (click)="selectedIcon.set(icon.value)"
+            >
+                {{ icon.symbol }}
+            </button>
+            }
+        </div>
+
+        <div class="habit-modal__colors">
+            @for (color of colors; track color) {
+            <button
+                type="button"
+                class="habit-modal__color"
+                [style.background-color]="color"
+                [class.is-active]="selectedColor() === color"
+                [attr.aria-label]="'Select color ' + color"
+                [attr.aria-pressed]="selectedColor() === color"
+                (click)="selectedColor.set(color)"
+            >
+                @if (selectedColor() === color) {
+                <span aria-hidden="true">✓</span>
+                }
+            </button>
+            }
+        </div>
+        </div>
+
       <div class="habit-modal__tip">
         <span aria-hidden="true">💡</span>
         <p>
@@ -98,7 +188,10 @@
         <button
           type="submit"
           class="habit-modal__submit"
-          [disabled]="!title().trim()"
+          [disabled]="
+            !title().trim() ||
+            (frequency() === 'custom' && customDays().length === 0)
+            "
         >
           {{ isEditing() ? 'Save changes' : '+ Add habit' }}
         </button>

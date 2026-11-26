@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { Habit } from '@models/habit.model';
 import { formatDate } from '@utils/format-date';
 import { SectionHeading } from '../section-heading/section-heading';
+import { isHabitScheduled } from '@utils/is-habit-scheduled';
 
 @Component({
   imports: [SectionHeading],
@@ -42,17 +43,22 @@ export class HabitActivity {
   isAvailable(habit: Habit, date: string): boolean {
     const createdAt = formatDate(new Date(habit.createdAt));
 
-  if (date < createdAt) {
-    return false;
-  }
+    if (date < createdAt) {
+      return false;
+    }
+    const scheduledDate = new Date(`${date}T12:00:00`);
 
-  if (habit.archived && habit.archivedAt) {
-    const archivedAt = formatDate(new Date(habit.archivedAt));
+    if (!isHabitScheduled(habit, scheduledDate)) {
+      return false;
+    }
 
-    return date <= archivedAt;
-  }
+    if (habit.archived && habit.archivedAt) {
+      const archivedAt = formatDate(new Date(habit.archivedAt));
 
-  return true;
+      return date <= archivedAt;
+    }
+
+    return true;
   }
 
   weeklyEfficiency = computed(() => {

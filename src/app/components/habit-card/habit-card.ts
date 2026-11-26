@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, inject, input, output, signal, vie
 import { Habit } from '@models/habit.model';
 import { FireStreak } from '@components/fire-streak/fire-streak';
 import { formatDate } from '@utils/format-date';
+import { isHabitScheduled } from '@utils/is-habit-scheduled';
 
 @Component({
   imports: [FireStreak],
@@ -72,4 +73,8 @@ export class HabitCard {
   private getToday(): string {
     return formatDate(new Date());
   }
+
+  isScheduledToday(): boolean {
+  return isHabitScheduled(this.habit(), new Date());
+}
 }

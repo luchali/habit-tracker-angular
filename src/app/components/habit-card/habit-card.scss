@@ -221,20 +221,70 @@
       border-color: v.$primary-color;
       color: v.$background-color;
     }
+    &-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    &--unscheduled:not(.habit-card__check--active) {
+      background: v.$primary-light;
+      border-color: v.$border-color;
+      color: transparent;
+    }
 
     &:hover {
       border-color: v.$primary-color;
       transform: scale(1.04);
     }
-  }
 
-   &__menu-button,
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }  
+  }
+  &__tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  z-index: 30;
+
+  width: max-content;
+  max-width: min(230px, 80vw);
+  padding: 10px 12px;
+
+  background: v.$text-primary;
+  color: v.$uicard-color;
+
+  border-radius: 10px;
+  box-shadow: v.$shadow-card;
+
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  white-space: normal;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.2s ease;
+}
+
+
+  &__menu-button,
   &__menu-item,
   &__check {
     &:focus-visible {
       outline: 3px solid v.$primary-color;
       outline-offset: 2px;
     }
+  }
+
+  &__check-wrapper:hover &__tooltip,
+  &__check-wrapper:focus-within &__tooltip {
+    opacity: 1;
+    visibility: visible;
   }
 
   @include m.mobile {

@@ -13,6 +13,8 @@ import {
   HabitModal,
   HabitFormData,
 } from '@components/habit-modal/habit-modal';
+import { isHabitScheduled } from '@utils/is-habit-scheduled';
+import { calculateScheduledStreak } from '@utils/calculate-scheduled-streak';
 
 @Component({
   imports: [HabitCard, HabitForm, HabitStatistics, HabitActivity, UiCard, ArchivedHabits, HeroSection, HabitModal],
@@ -33,7 +35,7 @@ export class Home {
   protected readonly editTitle = signal('');
   protected readonly editContent = signal('');
 
-  addHabit(data: { title: string; content: string }) {
+  addHabit(data: HabitFormData): void {
     const newHabit: Habit = {
       id: Date.now(),
       title: data.title,
@@ -41,6 +43,11 @@ export class Home {
       createdAt: new Date(),
       completedToday: false,
       completedDates: [],
+
+      frequency: data.frequency,
+      customDays: [...data.customDays],
+      icon: data.icon,
+      color: data.color,
     };
 
    this.habits.update(habits => {
@@ -77,6 +84,11 @@ export class Home {
       ...habit,
       createdAt: new Date(habit.createdAt),
       completedDates: habit.completedDates ?? [],
+
+      frequency: habit.frequency ?? 'daily',
+      customDays: habit.customDays ?? [],
+      icon: habit.icon ?? 'droplets',
+      color: habit.color ?? '#2861c4',
     }));
   }
 
@@ -90,24 +102,83 @@ export class Home {
     return `${year}-${month}-${day}`;
   }
 
-  toggleHabit(id: number) {
-    const today = this.getToday();
+//   toggleHabit(id: number) {
+//     const habit = this.habits().find(item => item.id === id);
+
+//    if (!habit) {
+//   return;
+// }
+
+// const today = this.getToday();
+// const isAlreadyCompleted = habit.completedDates.includes(today);
+
+// if (!isHabitScheduled(habit, new Date()) && !isAlreadyCompleted) {
+//   const confirmed = window.confirm(
+//     `"${habit.title}" is not scheduled for today.\n\n` +
+//     'Do you want to mark it as completed anyway?'
+//   );
+
+//   if (!confirmed) {
+//     return;
+//   }
+// }
+
+//     const today = this.getToday();
     
+//     this.habits.update(habits =>
+//       habits.map(habit => {
+//         if (habit.id !== id) {
+//           return habit;
+//         }
+
+//         const isCompletedToday =
+//           habit.completedDates.includes(today);
+
+//         return {
+//           ...habit,
+
+//           completedDates: isCompletedToday
+//             ? habit.completedDates.filter(date => date !== today)
+//             : [...habit.completedDates, today],
+//         };
+//       })
+//     );
+
+//     this.saveHabits(this.habits());
+//   }
+
+  toggleHabit(id: number): void {
+    const habit = this.habits().find(item => item.id === id);
+
+    if (!habit) {
+      return;
+    }
+
+    const today = this.getToday();
+    const isAlreadyCompleted = habit.completedDates.includes(today);
+
+    if (!isHabitScheduled(habit, new Date()) && !isAlreadyCompleted) {
+      const confirmed = window.confirm(
+        `"${habit.title}" is not scheduled for today.\n\n` +
+        'Do you want to mark it as completed anyway?'
+      );
+
+      if (!confirmed) {
+        return;
+      }
+    }
+
     this.habits.update(habits =>
-      habits.map(habit => {
-        if (habit.id !== id) {
-          return habit;
+      habits.map(item => {
+        if (item.id !== id) {
+          return item;
         }
 
-        const isCompletedToday =
-          habit.completedDates.includes(today);
-
         return {
-          ...habit,
-
-          completedDates: isCompletedToday
-            ? habit.completedDates.filter(date => date !== today)
-            : [...habit.completedDates, today],
+          ...item,
+          completedDates: isAlreadyCompleted
+            ? item.completedDates.filter(date => date !== today)
+            : [...item.completedDates, today],
         };
       })
     );
@@ -123,7 +194,8 @@ export class Home {
   }
 
   const streaks = habits.map(habit =>
-    calculateStreak(habit.completedDates)
+    // calculateStreak(habit.completedDates)
+    calculateScheduledStreak(habit)
   );
 
   return Math.max(...streaks);
@@ -187,6 +259,11 @@ saveHabitFromModal(data: HabitFormData): void {
               ...habit,
               title: data.title,
               content: data.content,
+
+              frequency: data.frequency,
+              customDays: [...data.customDays],
+              icon: data.icon,
+              color: data.color,
             }
           : habit
       )
@@ -267,7 +344,7 @@ saveHabitFromModal(data: HabitFormData): void {
     this.isAddModalOpen.set(false);
   }
 
-  onHabitCreated(data: { title: string; content: string }): void {
+  onHabitCreated(data: HabitFormData): void {
     this.addHabit(data);
     this.closeAddModal();
   }
