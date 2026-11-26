@@ -1,4 +1,4 @@
-<section class="activity">
+<!-- <section class="activity">
   <div class="activity__header">
     <div>
       <app-section-heading
@@ -80,4 +80,178 @@
       ></div>
     </div>
   </div>
-</section>
+</section> -->
+
+<div class="activity">
+  <section class="activity__panel">
+    <div class="activity__header">
+      <div>
+        <h2 class="activity__title">
+          Weekly Habit Activity
+        </h2>
+
+        <p class="activity__subtitle">
+          {{ weekLabel }} (Last 7 days)
+        </p>
+      </div>
+
+      <span class="activity__success">
+        {{ weeklyEfficiency() }}% Success
+      </span>
+    </div>
+
+    <div
+      class="activity__scroll"
+      tabindex="0"
+      role="region"
+      aria-label="Weekly habit activity"
+    >
+      <div class="activity__table">
+        <div class="activity__row activity__row--header">
+          <span class="activity__column-title">
+            Habit
+          </span>
+
+          @for (day of days; track day.date) {
+            <div
+              class="activity__day"
+              [class.activity__day--today]="day.date === today"
+            >
+              <span>{{ day.label }}</span>
+              <small>{{ day.dayNumber }}</small>
+            </div>
+          }
+        </div>
+
+        @for (habit of habits(); track habit.id) {
+          <div class="activity__row">
+            <div class="activity__habit">
+              <span
+                class="activity__habit-name"
+                [title]="habit.title"
+              >
+                {{ habit.title }}
+              </span>
+
+              @if (habit.archived) {
+                <span class="activity__badge">
+                  Archived
+                </span>
+              }
+            </div>
+
+            @for (day of days; track day.date) {
+              <div
+                class="activity__cell"
+                [class.activity__cell--today]="day.date === today"
+                [attr.aria-label]="
+                  habit.title + ', ' + day.date +
+                  ': ' + getDayStatus(habit, day.date)
+                "
+                [title]="
+                  habit.title + ' — ' + day.date +
+                  ': ' + getDayStatus(habit, day.date)
+                "
+              >
+                <span
+                  class="activity__indicator"
+                  [class.activity__indicator--completed]="
+                    getDayStatus(habit, day.date) === 'completed'
+                  "
+                  [class.activity__indicator--extra]="
+                    getDayStatus(habit, day.date) === 'extra'
+                  "
+                  [class.activity__indicator--unavailable]="
+                    getDayStatus(habit, day.date) === 'unavailable'
+                  "
+                  [class.activity__indicator--pending]="
+                    getDayStatus(habit, day.date) === 'pending'
+                  "
+                >
+                  @if (
+                    getDayStatus(habit, day.date) === 'completed' ||
+                    getDayStatus(habit, day.date) === 'extra'
+                  ) {
+                    ✓
+                  }
+                </span>
+              </div>
+            }
+          </div>
+        } @empty {
+          <p class="activity__empty">
+            No habits yet. Add your first habit to track progress.
+          </p>
+        }
+      </div>
+    </div>
+
+    <div class="activity__legend">
+      <span>
+        <i class="activity__legend-icon activity__legend-icon--completed"></i>
+        Completed
+      </span>
+
+      <span>
+        <i class="activity__legend-icon activity__legend-icon--missed"></i>
+        Missed / Pending
+      </span>
+
+      <span>
+        <i class="activity__legend-icon activity__legend-icon--extra"></i>
+        Extra
+      </span>
+
+      <span>
+        <i class="activity__legend-icon activity__legend-icon--unavailable"></i>
+        Not scheduled
+      </span>
+    </div>
+  </section>
+
+  <section class="activity__panel activity__panel--summary">
+    <div class="activity__summary-header">
+      <h2 class="activity__title">
+        Weekly Completion Rate
+      </h2>
+
+      <strong class="activity__percentage">
+        {{ weeklyEfficiency() }}%
+      </strong>
+    </div>
+
+    <div
+      class="activity__progress"
+      role="progressbar"
+      aria-label="Weekly completion rate"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [attr.aria-valuenow]="weeklyEfficiency()"
+    >
+      <div
+        class="activity__progress-fill"
+        [style.width.%]="weeklyEfficiency()"
+      ></div>
+    </div>
+
+    <div class="activity__target">
+      <span>Target: {{ weeklyTarget }}% minimum</span>
+      <span>
+        {{ weeklyStats().completed }} /
+        {{ weeklyStats().total }} completed
+      </span>
+    </div>
+
+    <p class="activity__message">
+      @if (weeklyStats().total === 0) {
+        No scheduled habit days to track yet.
+      } @else if (weeklyEfficiency() >= weeklyTarget) {
+        Great job! You've reached your weekly goal.
+      } @else {
+        You're {{ remainingToTarget() }} planned
+        check-ins away from your weekly target.
+        Keep going!
+      }
+    </p>
+  </section>
+</div>
