@@ -43,11 +43,42 @@
     </div>
   </div>
 </section> -->
-<section class="statistics">
+<!-- <section class="statistics">
   <app-stat-card
     title="Total Habits"
     [value]="totalHabits().toString()"
     description="Active habits"
+    icon="📋"
+  />
+
+  <app-stat-card
+    title="Completed Today"
+    [value]="completedLabel()"
+    [progress]="dailyProgress()"
+    icon="✅"
+  />
+
+  <app-stat-card
+    title="Top Active Streak"
+    [value]="maxStreak() + ' days'"
+    description="Keep it going!"
+    icon="🔥"
+    variant="success"
+  />
+
+  <app-stat-card
+    title="Today's Goal"
+    [value]="dailyProgress() + '%'"
+    [description]="remainingLabel()"
+    icon="🎯"
+  />
+</section> -->
+
+<section class="statistics">
+  <app-stat-card
+    title="Total Habits"
+    [value]="totalHabits().toString()"
+    [description]="totalDescription()"
     icon="📋"
   />
 

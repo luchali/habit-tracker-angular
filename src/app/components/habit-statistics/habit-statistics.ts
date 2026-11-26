@@ -14,47 +14,61 @@ export class HabitStatistics {
   habits = input.required<Habit[]>();
   maxStreak = input.required<number>();
 
-  totalHabits = computed(() => this.habits().length);
+  activeHabits = computed(() =>
+  this.habits().filter(habit => !habit.archived)
+);
 
-  completedToday = computed(() => {
-    const today = formatDate(new Date());
+archivedHabits = computed(() =>
+  this.habits().filter(habit => habit.archived === true)
+);
 
-    return this.habits().filter(habit =>
-      habit.completedDates.includes(today)
-    ).length;
-  });
+totalHabits = computed(() => this.habits().length);
 
-  dailyProgress = computed(() => {
-    const total = this.totalHabits();
+activeCount = computed(() => this.activeHabits().length);
 
-    if (total === 0) {
-      return 0;
-    }
+archivedCount = computed(() => this.archivedHabits().length);
 
-    return Math.round(
-      (this.completedToday() / total) * 100
-    );
-  });
+totalDescription = computed(() =>
+  `${this.activeCount()} Active · ${this.archivedCount()} Archived`
+);
 
-  remainingHabits = computed(() =>
-    this.totalHabits() - this.completedToday()
-  );
+completedToday = computed(() => {
+  const today = formatDate(new Date());
 
-  completedLabel = computed(() =>
-    `${this.completedToday()} / ${this.totalHabits()}`
-  );
+  return this.activeHabits().filter(habit =>
+    habit.completedDates.includes(today)
+  ).length;
+});
 
-  remainingLabel = computed(() => {
-    const remaining = this.remainingHabits();
+dailyProgress = computed(() => {
+  const total = this.activeCount();
 
-    if (this.totalHabits() === 0) {
-      return 'Add your first habit';
-    }
+  if (total === 0) {
+    return 0;
+  }
 
-    if (remaining === 0) {
-      return 'All habits completed!';
-    }
+  return Math.round((this.completedToday() / total) * 100);
+});
 
-    return `${remaining} habit${remaining === 1 ? '' : 's'} remaining`;
-  });
+remainingHabits = computed(() =>
+  this.activeCount() - this.completedToday()
+);
+
+completedLabel = computed(() =>
+  `${this.completedToday()} / ${this.activeCount()}`
+);
+
+remainingLabel = computed(() => {
+  const remaining = this.remainingHabits();
+
+  if (this.activeCount() === 0) {
+    return 'No active habits';
+  }
+
+  if (remaining === 0) {
+    return 'All active habits completed!';
+  }
+
+  return `${remaining} habit${remaining === 1 ? '' : 's'} remaining`;
+});
 }

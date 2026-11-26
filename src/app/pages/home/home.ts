@@ -192,13 +192,10 @@ export class Home {
   if (!habits.length) {
     return 0;
   }
-
-  const streaks = habits.map(habit =>
-    // calculateStreak(habit.completedDates)
-    calculateScheduledStreak(habit)
+  
+  return Math.max(
+    ...habits.map(habit => calculateScheduledStreak(habit))
   );
-
-  return Math.max(...streaks);
 });
 
   deleteHabit(id: number) {

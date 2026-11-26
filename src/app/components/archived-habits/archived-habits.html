@@ -1,36 +1,113 @@
-<section class="archived">
-  <header class="archived__header">
-    <h2>Archived Habits</h2>
-    <span class="archived__count">
-      {{ habits().length }}
-    </span>
-  </header>
+<section class="archive">
+  <button
+    type="button"
+    class="archive__header"
+    [attr.aria-expanded]="isExpanded()"
+    aria-controls="archived-habits-list"
+    (click)="toggleArchive()"
+  >
+    <span class="archive__header-main">
+      <span class="archive__header-icon" aria-hidden="true">
+        ▣
+      </span>
 
-  @for (habit of habits(); track habit.id) {
-    <div class="archived__item">
-      <div class="archived__info">
-        <h3>{{ habit.title }}</h3>
+      <span class="archive__heading">
+        <span class="archive__title-row">
+          <span class="archive__title">
+            Archived Habits
+          </span>
 
-        @if (habit.content) {
-          <p>{{ habit.content }}</p>
-        }
-
-        <span class="archived__badge">
-          Archived
+          <span class="archive__count">
+            {{ habits().length }}
+          </span>
         </span>
-      </div>
 
-      <button
-        type="button"
-        class="archived__restore"
-        (click)="restoreHabit.emit(habit.id)"
-      >
-        Restore
-      </button>
+        <span class="archive__subtitle">
+          Previously archived habits
+        </span>
+      </span>
+    </span>
+
+    <span
+      class="archive__chevron"
+      [class.archive__chevron--expanded]="isExpanded()"
+      aria-hidden="true"
+    >
+      ⌄
+    </span>
+  </button>
+
+  <div
+    id="archived-habits-list"
+    class="archive__body"
+    [hidden]="!isExpanded()"
+  >
+    <div class="archive__list">
+      @for (habit of habits(); track habit.id) {
+        <article class="archive__habit">
+          <div
+            class="archive__habit-icon"
+            [style.--habit-color]="habit.color ?? '#2861c4'"
+            aria-hidden="true"
+          >
+            @switch (habit.icon) {
+              @case ('dumbbell') {
+                <span>🏋️</span>
+              }
+
+              @case ('book-open') {
+                <span>📖</span>
+              }
+
+              @case ('moon') {
+                <span>🌙</span>
+              }
+
+              @default {
+                <span>💧</span>
+              }
+            }
+          </div>
+
+          <div class="archive__habit-info">
+            <h3 class="archive__habit-title">
+              {{ habit.title }}
+            </h3>
+
+            @if (habit.content) {
+              <p class="archive__habit-description">
+                {{ habit.content }}
+              </p>
+            }
+
+            <div class="archive__habit-meta">
+              <span class="archive__badge">
+                Archived
+              </span>
+
+              @if (habit.archivedAt) {
+                <span class="archive__date">
+                  {{ habit.archivedAt | date:'MMM d, y' }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="archive__restore"
+            [attr.aria-label]="'Restore ' + habit.title"
+            (click)="onRestore(habit.id)"
+          >
+            <span aria-hidden="true">↺</span>
+            Restore
+          </button>
+        </article>
+      } @empty {
+        <p class="archive__empty">
+          No archived habits yet.
+        </p>
+      }
     </div>
-  } @empty {
-    <p class="archived__empty">
-      No archived habits yet.
-    </p>
-  }
+  </div>
 </section>

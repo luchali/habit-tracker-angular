@@ -1,77 +1,268 @@
 @use 'utils/variables' as v;
+@use 'utils/mixins' as m;
 
-.archived {
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.archive {
+  width: 100%;
+  min-width: 0;
+
   &__header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-
-    h2 {
-      margin: 0;
-      font-size: 20px;
-    }
-  }
-
-  &__count {
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: v.$background-color;
-    color: v.$secondary-color;
-    font-size: 12px;
-  }
-
-  &__item {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid v.$border-color;
+
+    width: 100%;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    text-align: left;
+    cursor: pointer;
   }
 
-  &__info {
+  &__header-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     min-width: 0;
+  }
 
-    h3 {
-      margin: 0 0 4px;
-      font-size: 15px;
-      overflow-wrap: anywhere;
-    }
+  &__header-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
 
-    p {
-      margin: 0 0 8px;
-      color: v.$secondary-color;
-      font-size: 13px;
+    width: 42px;
+    height: 42px;
+
+    border-radius: v.$radius-md;
+    background: v.$primary-light;
+
+    color: v.$primary-color;
+    font-size: 22px;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+
+  &__title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__title {
+    color: v.$text-primary;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__count {
+    padding: 4px 9px;
+
+    background: v.$primary-light;
+    color: v.$primary-color;
+
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    color: v.$text-secondary;
+    font-size: 13px;
+  }
+
+  &__chevron {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    background: v.$surface-color;
+    border-radius: 50%;
+
+    color: v.$text-secondary;
+    font-size: 24px;
+
+    transition: transform 0.2s ease;
+
+    &--expanded {
+      transform: rotate(180deg);
     }
+  }
+
+  &__body {
+    margin-top: 20px;
+    padding-top: 20px;
+
+    border-top: 1px solid v.$uicardborder-color;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__habit {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 0;
+    padding: 16px;
+
+    background: v.$background-color;
+    border: 1px solid v.$uicardborder-color;
+    border-radius: v.$radius-md;
+  }
+
+  &__habit-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: v.$radius-md;
+
+    background: color-mix(
+      in srgb,
+      var(--habit-color) 12%,
+      white
+    );
+
+    font-size: 22px;
+  }
+
+  &__habit-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__habit-title {
+    margin: 0 0 4px;
+
+    color: v.$text-primary;
+    font-size: 14px;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+  }
+
+  &__habit-description {
+    margin: 0;
+
+    color: v.$text-secondary;
+    font-size: 12px;
+    line-height: 1.5;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__habit-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 8px;
   }
 
   &__badge {
-    display: inline-block;
-    padding: 4px 9px;
-    background: v.$background-color;
-    border-radius: 8px;
-    color: v.$secondary-color;
+    padding: 4px 8px;
+
+    background: v.$surface-color;
+    border-radius: 6px;
+
+    color: v.$text-secondary;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  &__date {
+    color: v.$text-muted;
     font-size: 11px;
   }
 
   &__restore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     flex-shrink: 0;
-    padding: 8px 14px;
-    background: transparent;
-    border: 1px solid v.$border-color;
-    border-radius: 10px;
+
+    padding: 9px 13px;
+
+    background: v.$uicard-color;
+    border: 1px solid v.$uicardborder-color;
+    border-radius: v.$radius-sm;
+
     color: v.$primary-color;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
+
     cursor: pointer;
 
     &:hover {
-      background: v.$background-color;
+      background: v.$primary-light;
+      border-color: v.$primary-color;
+    }
+
+    &:focus-visible {
+      outline: 3px solid v.$primary-color;
+      outline-offset: 2px;
     }
   }
 
   &__empty {
-    color: v.$secondary-color;
-    font-size: 14px;
+    margin: 0;
+    padding: 20px;
+
+    text-align: center;
+    color: v.$text-secondary;
+    font-size: 13px;
+  }
+
+  @include m.mobile {
+    &__habit {
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    &__habit-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &__restore {
+      margin-left: auto;
+    }
   }
 }
